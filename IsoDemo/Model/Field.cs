@@ -76,7 +76,7 @@ public sealed class Field
     public static int GenerateRightSpriteIndex(TileSurface surface, int height)
     {
         bool useVariation = Random.Shared.Next(4) == 0;
-        return height * 2 + (useVariation ? 9 : 1);;
+        return height * 2 + (useVariation ? 9 : 1);
     }
 }
 
@@ -94,6 +94,9 @@ public sealed record Coordinate(int X, int Y) : IComparable<Coordinate>
 
 public sealed class Tile
 {
+    public const int TileWidth = 36;
+    public const int TileHeight = 18; // note: sprite is 19 pixels high; there's one pixel of overlap between tiles
+
     public required TileSurface Surface { get; set; }
     public required int SurfaceSpriteIndex { get; set; }
     public required int Height { get; set; }

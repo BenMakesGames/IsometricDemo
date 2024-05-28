@@ -26,18 +26,18 @@ public sealed class FieldRenderer
 
         foreach (var (c, tile) in Field.Tiles)
         {
-            var pixelX = c.X * 18 - c.Y * 18 + xOffset;
-            var pixelY = c.Y * 9 + c.X * 9 - tile.Height * 5 + yOffset;
+            var pixelX = c.X * (Tile.TileWidth / 2) - c.Y * (Tile.TileWidth / 2) + xOffset;
+            var pixelY = c.Y * (Tile.TileHeight / 2) + c.X * (Tile.TileHeight / 2) - tile.Height * 5 + yOffset;
 
             Graphics.DrawSprite("TileTops", pixelX, pixelY, tile.SurfaceSpriteIndex);
 
-            Graphics.DrawSprite("TileSides", pixelX, pixelY + 10, tile.LeftSpriteIndex);
-            Graphics.DrawSprite("TileSides", pixelX + 18, pixelY + 10, tile.RightSpriteIndex);
+            Graphics.DrawSprite("TileSides", pixelX, pixelY + (Tile.TileHeight / 2) + 1, tile.LeftSpriteIndex);
+            Graphics.DrawSprite("TileSides", pixelX + (Tile.TileWidth / 2), pixelY + (Tile.TileHeight / 2) + 1, tile.RightSpriteIndex);
 
             Graphics.DrawPicture("Grid", pixelX, pixelY, DawnBringers16.DarkGray);
 
             if (Field.FighterLocations.TryGetValue(c, out var fighter))
-                Graphics.DrawSprite("Warrior", pixelX, pixelY - 60 + 19, 0, Color.White);
+                Graphics.DrawSprite(fighter.SpriteSheet, pixelX, pixelY - 60 + 19, fighter.SpriteIndex, Color.White);
         }
     }
 }
