@@ -20,12 +20,15 @@ public sealed class Field
 
         field.AddFighter(new Fighter() { Location = new(5, 4) });
 
-        for(int x = 0; x < 10; x++)
+        // for demonstration purposes, just pull the "Hill", which we know
+        // is 10x10. for a real game, you might fractal-generate terrain, or
+        // randomly assemble pieces, or load from a file, or who knows what.
+        for(int y = 0; y < 10; y++)
         {
-            for(int y = 0; y < 10; y++)
+            for(int x = 0; x < 10; x++)
             {
                 var surface = TileSurface.Grass;
-                var height = Hill.Field[x][y];
+                var height = Hill.Field[y][x]; // annoying/confusing, x & y are swapped
 
                 var tile = new Tile
                 {
